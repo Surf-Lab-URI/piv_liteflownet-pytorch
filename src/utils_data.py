@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.model_selection import ShuffleSplit
+from sklearn.model_selection import ShuffleSplit #used to be sklearn, which is now depricated
 import PIL.Image
 
 import os
