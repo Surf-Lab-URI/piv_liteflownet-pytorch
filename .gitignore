@@ -7,6 +7,7 @@ models/*
 net_preview/
 outputs/*
 work/
+images/demo/DemoOutput/
 
 # Expressions
 *test*
