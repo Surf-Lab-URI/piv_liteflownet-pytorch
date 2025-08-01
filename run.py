@@ -8,6 +8,7 @@ from glob import glob
 from typing import Tuple
 
 import torch
+torch.cuda.empty_cache()
 from torch.utils.data import DataLoader
 import torchvision.transforms.functional as TF
 from PIL import Image
