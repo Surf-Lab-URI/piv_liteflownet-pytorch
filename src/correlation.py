@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import torch
-
 import cupy
 import math
 import re
@@ -274,8 +273,8 @@ def cupy_kernel(strFunction, objVariables):
 
 
 # end
-
-@cupy.util.memoize(for_each_device=True)
+#used to be cupy.util.memoize, Andy changed it
+@cupy.memoize(for_each_device=True)
 def cupy_launch(strFunction, strKernel):
     return cupy.cuda.compile_with_cache(strKernel).get_function(strFunction)
 
