@@ -127,7 +127,7 @@ class Train:
         # Start batch iteration
         for batch_idx, (data, target) in enumerate(progress):
             if self.args.cuda and self.args.number_gpus > 0:
-                data, target = [d.cuda(async=True) for d in data], [t.cuda(async=True) for t in target]
+                data, target = [d.cuda(non_blocking=True) for d in data], [t.cuda(non_blocking=True) for t in target]
 
             with torch.set_grad_enabled(bool(re.search("train", loader_key))):
                 self.optimizer.zero_grad() if bool(re.search('val', loader_key)) else None
