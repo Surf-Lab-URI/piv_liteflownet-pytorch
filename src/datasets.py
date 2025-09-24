@@ -275,13 +275,15 @@ class PIVData(Dataset):
 
         exts = ['.jpg', '.jpeg', '.png', '.bmp', '.tif', '.ppm']
         dataset_list = sorted(glob(os.path.join(root, f'*.json')))
+        print(f"dataset_list:{dataset_list}")
 
         self.flow_list = []
         self.image_list = []
 
         for dataset_file in dataset_list:
+            print("Hi there")
             flonames = json_pickler(dataset_file, self.set_type, self.replicates)
-
+            print(f"flonames: {flonames}")
             for flo in flonames:
                 if 'test' in flo:
                     continue
@@ -609,22 +611,26 @@ def get_transform(args):
 
 # -------------------- Helper --------------------
 def json_pickler(set_dir: str, set_type: str, replicates: int = 1) -> List[str]:
+    print(f"json_pickler set_type is {set_type}")
+    print(f"json_pickler set_dir is {set_dir}")
     modes = ['train', 'val', 'test']
     if set_type not in modes:
-        raise ValueError(f'Unknown input of mode ({set_type})! Choose between {(" or ").join(modes)} only!')
+        raise ValueError("Unknown input of mode. Choose between train, val, or test only!")
 
     subdir = os.path.basename(set_dir).rsplit('_', 1)[0]
-    directory = os.path.join(os.path.dirname(os.path.dirname(set_dir)), subdir)
-
+    directory = os.path.join(os.path.dirname(set_dir), subdir)
+    print(f"json_pickler directory is {directory}")
     datanames = []
     with open(set_dir) as json_file:
         data = json.load(json_file)[set_type]
-
+        print(f"json_pickler data is {data}")
         for line in data:
             bname = os.path.basename(line)
+            print(f"json_pickler bname is {bname}")
             filename = os.path.join(directory, bname)
-
+            print(f"json_pickler filename is {filename}")
             if os.path.isfile(filename):
+                print("json_pickler filename is a file")
                 for i in range(replicates):
                     datanames.append(filename)
 
@@ -634,13 +640,14 @@ def json_pickler(set_dir: str, set_type: str, replicates: int = 1) -> List[str]:
 def df_pickler(set_dir: str, replicate: int = 1, mode='json') -> List[str]:
     subdir = os.path.basename(set_dir).rsplit('_', 1)[0]
     directory = os.path.join(os.path.dirname(set_dir), subdir)
-
+    print(f"the mode for df_pickler is {mode}")
     if mode == 'csv':
         df_label = pd.read_csv(set_dir)
     elif mode == 'json':
         df_label = pd.read_json(set_dir)
+        print(f"the mode for df_pickler is {mode}")
     else:
-        raise ValueError(f'Unknown input occured (mode: {mode}! Choose between "csv" or "json" only!')
+        raise ValueError("Unknown input occured. Choose between csv or json only!")
 
     datanames = []
     for index, row in df_label.iterrows():
