@@ -221,6 +221,9 @@ class Train:
         tqdm.write("\n")
 
 
+
+
+
 if __name__ == '__main__':
     # ------------------------------ DEBUGGING (temp) ------------------------------
     debug_input = [
@@ -233,11 +236,11 @@ if __name__ == '__main__':
         '--optimizer_lr', '4e-5',
         '--loss_startScale', '2', '--loss_l_weight', '0.001', '0.001', '0.001', '0.001', '0.01', '6.25e-4', '--loss_use_mean', 'false',
         '--lr_scheduler', 'MultiStepLR', '--lr_scheduler_milestones', '120', '240', '360', '480', '600', '--lr_scheduler_gamma', '0.5',
-        '--training_dataset', 'PIVLMDB', '--training_dataset_root', '../piv_datasets/cai2018/ztest_lmdb/piv_cai2018',
-        '--validation_dataset', 'PIVLMDB', '--validation_dataset_root', '../piv_datasets/cai2018/ztest_lmdb/piv_cai2018',
+        '--training_dataset', 'PIVData', '--training_dataset_root', '/expanse/lustre/projects/uri107/agoering/cai2018_dataset/',
+        '--validation_dataset', 'PIVData', '--validation_dataset_root', '/expanse/lustre/projects/uri107/agoering/cai2018_dataset/',
         '--logger_disabled', 'true']
 
-    # sys.argv = debug_input  # Uncomment for debugging
+    sys.argv = debug_input  # Uncomment for debugging
 
     # ------------------------------ PARSING THE INPUT ------------------------------
     # Parse the official arguments
