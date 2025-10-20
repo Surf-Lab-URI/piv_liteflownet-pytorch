@@ -193,7 +193,7 @@ class IteratorTimer():
 def kwargs_from_args(args, argument_for_class):
     argument_for_class = argument_for_class + '_'
     return {key[len(argument_for_class):]: value for key, value in list(vars(args).items())
-            if argument_for_class in key and key not in [argument_for_class + 'class', argument_for_class + 'func']}
+            if key.startswith(argument_for_class) and key not in [argument_for_class + 'class', argument_for_class + 'func']}
 
 
 def save_checkpoint(state, is_best, path, prefix, filename=None):
