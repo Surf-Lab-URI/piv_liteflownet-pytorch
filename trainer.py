@@ -229,7 +229,7 @@ if __name__ == '__main__':
     debug_input = [
         'trainer.py', # '--no_cuda',
         '--crop_size', '64', '64',
-        '-b', '2',
+        '-b', '25',
         '--seed', '69',
         '--name', 'train_trial',
         '--model', 'LiteFlowNet2', '--model_starting_scale', '10', '--model_lowest_level', '2',
@@ -402,8 +402,10 @@ if __name__ == '__main__':
     with utils.TimerBlock("Initializing {} Optimizer".format(args.optimizer)) as block:
         level2use = list(range(args.model_lowest_level, 6+1))
         def_id = [i for i, level in enumerate(level2use) if level < 4]
-
+        print('inside optimizer')
+        print(args)
         kwargs = utils.kwargs_from_args(args, 'optimizer')
+        print(kwargs)
         param_group = [
             {'params': [p for n, p in model_and_loss.named_parameters() if p.requires_grad and n.endswith(".weight")
                         and ("NetE" in n.split('.')[2] and int(n.split('.')[3]) in def_id)],
