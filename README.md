@@ -1,6 +1,19 @@
 # Andy's Modifications
 
-## Docker Container
+## Using on Expanse
+Create a conda environment using the yml file "environment.yml." Activate the conda environment.
+
+Then, using a GPU node, execute the following to set up compatible versions of CUDA and cuDNN:
+
+```console
+module load gpu/0.17.3b  gcc/10.2.0/i62tgso
+module load cuda11.7/toolkit
+module load cudnn/8.1.1.33-11.2/33nnn6h
+```
+Then you should be able to execute run.py. See below for example arguements.
+
+## Using in a Docker Container on Desktop Computer
+See the Desktop branch
 ### Getting Started
 The dockerfile should allow you to build a functional container, within which you can run piv_liteflownet-pytorch. The container will have compatible versions of CUDA, CUDNN, PyTorch, CuPy, Python, Ubuntu, etc. To build the docker container image, run:
 ```
